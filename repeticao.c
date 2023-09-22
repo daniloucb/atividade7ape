@@ -111,11 +111,11 @@ void fruitList()
 void pesquisa()
 {
     char sexo, eyesColor, hairColor;
-    unsigned int age = 0, salary;
+    int totalHabitantes = 0, requisitos = 0;
+    unsigned int age, salary;
+    float porcentagemFinal;
 
-    printf("deseja iniciar pesquisa? (s/n)");
-
-    while(getch != 's') {
+    while(age != -1) {
         printf("responda às seguintes perguntas: \n\n");
 
         printf("sexo (m, f)");
@@ -125,14 +125,23 @@ void pesquisa()
         while((eyesColor = getchar()) != 'a' && eyesColor != 'v' && eyesColor != 'c' && eyesColor != 'p');
     
         printf("cor dos cabelos (l, c, p, r) \n");
-        while((eyesColor = getchar()) != 'l' && eyesColor != 'c' && eyesColor != 'p' && eyesColor != 'r');
+        while((hairColor = getchar()) != 'l' && hairColor != 'c' && hairColor != 'p' && hairColor != 'r');
 
         printf("idade (entre 10 e 100 anos) \n");
-        while(age < 10 || age > 100)
+        do {
             scanf("%d", &age);
+        } while(age < 10 && age > 100);
 
-        printf("deseja iniciar nova pesquisa?");
+        if(sexo == 'f' && eyesColor == 'c' && hairColor == 'c' && (age > 18 && age < 35)) 
+        {
+            requisitos++;
+        }
+        totalHabitantes++;
     }
+
+    porcentagemFinal = (float)(requisitos * 100) / totalHabitantes;
+    printf("quantidade de pessoas entrevistadas: %d\n", totalHabitantes);
+    printf("porcentagem de indivíduos do sexo feminino, com idade entre 18 e 35 anos e que tenham olhos castanhos e cabelos castanhos %.2f", porcentagemFinal);
 };
 
 int main()
